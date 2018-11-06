@@ -1,34 +1,41 @@
-Vue.component('message',{
-  props:['title','body'],
-
-  data(){
-    return {
-      isVisible:true
-    };
-  },
-
+Vue.component('task-list',{
   template:`
-  <article class="message" v-show="isVisible">
-    <div class="message-header">
-      <p>{{title}}</p>
-      <button class="delete" aria-label="delete" @click="isVisible = false"></button>
+  <div>
+    <task v-for="task in tasks">{{task.task}}</task>
     </div>
-    <div class="message-body">
-      {{body}}
-    </div>
-  </article>
   `,
-
-  methods:{
-    hideModal(){
-      this.isVisible = false;
-    }
+  data()
+  {
+    return{
+    tasks:[
+      {task:'One',completed:true},
+      {task:'Two',completed:true},
+      {task:'Three',completed:true},
+    ]
+  };
   }
-
 });
 
+Vue.component('task',{
+    template: '<li><slot></slot></li>',
+});
 
 new Vue({
-  el:'#root',
-
+  el:"#root",
 });
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////
+/*
+Vue.component('task',{
+  template:'<li><slot></slot></li>',
+});
+new Vue({
+  el:"#root",
+});
+*/
